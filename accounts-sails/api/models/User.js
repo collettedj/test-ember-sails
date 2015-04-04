@@ -14,6 +14,9 @@ module.exports = {
     lastName:{
       type:'string'
     },
+    middile:{
+      type:'string'
+    }
   }
 };
 
