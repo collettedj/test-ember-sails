@@ -1,0 +1,16 @@
+<h2 id="title">Welcome to Ember.js</h2>
+
+{{input value=newUser.firstName}}
+{{input value=newUser.lastName}}
+<button type="button" {{action 'createUser'}}>Add User</button>
+
+<ul>
+    {{#each model as |user|}}
+      <li>
+        {{input value=user.firstName classNameBindings="user.isDirty:input-dirty"}}
+        {{input value=user.lastName classNameBindings="user.isDirty:input-dirty"}}
+        <button type="button" {{action 'updateUser' user}}>Save</button>
+        <button type="button" {{action 'deleteUser' user}}>&times;</button>
+      </li>
+    {{/each}}
+</ul>
