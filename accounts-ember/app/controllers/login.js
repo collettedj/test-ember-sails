@@ -1,18 +1,23 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  email:'',
-  password:'',
+  email:'collettedj@gmail.com',
+  password:'password',
+  authError: '',
+
+  hasErrors: function(){
+    var authError = this.get('authError');
+    return !Ember.isBlank(authError);
+  }.property('authError'),
+
   actions:{
     login:function(){
       var email = this.get('email');
       var password = this.get('password');
-      $.ajax({
-          type: "POST",
-          url: "https://localhost:1337/auth/local",
-          data: {identifier: email, password: password}
-        });
+      this.get('session').authenticate('authenticator:custom', {identifier: email, password: password});
     }
+
+
   }
 
 });

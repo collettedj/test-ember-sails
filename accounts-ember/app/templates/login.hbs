@@ -5,3 +5,9 @@
 <label>Password</label>
 {{input value=password class="form-control"}}
 <button type="button" class="btn btn-info" {{action 'login'}}>Login</button>
+
+{{#if hasErrors}}
+  <div class="alert alert-danger">
+      <p>{{authError}}</p>
+  </div>
+{{/if}}

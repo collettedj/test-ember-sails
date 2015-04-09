@@ -69,11 +69,11 @@ var AuthController = {
    */
   logout: function (req, res) {
     req.logout();
-    
+
     // mark the user as logged out for auth purposes
     req.session.authenticated = false;
-    
-    res.redirect('/');
+
+    res.send(200);
   },
 
   /**
@@ -130,47 +130,59 @@ var AuthController = {
       // because we shouldn't expose internal authorization errors to the user.
       // We do return a generic error and the original request body.
       var flashError = req.flash('error')[0];
+      var errorMessage = "";
 
       if (err && !flashError ) {
-        req.flash('error', 'Error.Passport.Generic');
+        //req.flash('error', 'Error.Passport.Generic');
+        errorMessage = 'Error.Passport.Generic';
       } else if (flashError) {
         req.flash('error', flashError);
+        errorMessage = flashError;
       }
-      req.flash('form', req.body);
+      //req.flash('form', req.body);
 
       // If an error was thrown, redirect the user to the
       // login, register or disconnect action initiator view.
       // These views should take care of rendering the error messages.
       var action = req.param('action');
 
-      switch (action) {
-        case 'register':
-          res.redirect('/register');
-          break;
-        case 'disconnect':
-          res.redirect('back');
-          break;
-        default:
-          res.redirect('/login');
-      }
+      res.status(401).send(errorMessage);
+
+      //switch (action) {
+      //  case 'register':
+      //    res.redirect('/register');
+      //    break;
+      //  case 'disconnect':
+      //    res.redirect('back');
+      //    break;
+      //  //case 'api':
+      //  //  res.send(200);
+      //  //  break;
+      //  default:
+      //    //res.redirect('/login');
+      //        res.send(400);
+      //}
     }
 
     passport.callback(req, res, function (err, user, challenges, statuses) {
       if (err || !user) {
         return tryAgain(challenges);
+        //res.send(404);
       }
 
       req.login(user, function (err) {
         if (err) {
           return tryAgain(err);
+          //res.send(400);
         }
-        
+
         // Mark the session as authenticated to work with default Sails sessionAuth.js policy
         req.session.authenticated = true
-        
+
         // Upon successful login, send the user to the homepage were req.user
         // will be available.
-        res.redirect('/');
+        //res.redirect('/');
+        res.send(200);
       });
     });
   },
