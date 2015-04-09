@@ -1,16 +1,37 @@
 <h2 id="title">Welcome to Ember.js</h2>
 
-{{input value=newUser.firstName}}
-{{input value=newUser.lastName}}
-<button type="button" {{action 'createUser'}}>Add User</button>
 
-<ul>
-    {{#each model as |user|}}
-      <li>
-        {{input value=user.firstName classNameBindings="user.isDirty:input-dirty"}}
-        {{input value=user.lastName classNameBindings="user.isDirty:input-dirty"}}
-        <button type="button" {{action 'updateUser' user}}>Save</button>
-        <button type="button" {{action 'deleteUser' user}}>&times;</button>
-      </li>
-    {{/each}}
-</ul>
+<form class="form-inline" style="margin-bottom:10px;">
+    <div class="form-group">
+      <label >First Name</label>
+      {{input value=newUser.firstName class="form-control" placeholder="First Name"}}
+    </div>
+    <div class="form-group">
+      <label >Last Name</label>
+      {{input value=newUser.lastName class="form-control"  placeholder="Last Name"}}
+    </div>
+    <button type="button" class="btn btn-default" {{action 'createUser'}}>Add User</button>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-hover table-condensed table-bordered">
+        <thead>
+        <tr>
+            <th class="col-sm-6">First</th>
+            <th class="col-sm-6">Last</th>
+            <th>Save</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+      <tbody>
+        {{#each model as |user|}}
+          <tr>
+            <td>{{input value=user.firstName classNameBindings="user.isDirty:input-dirty :form-control"}}</td>
+            <td>{{input value=user.lastName classNameBindings="user.isDirty:input-dirty :form-control"}}</td>
+            <td><button type="button" class="btn btn-default"  {{action 'updateUser' user}}>Save</button></td>
+            <td><button type="button" class="btn btn-default"  {{action 'deleteUser' user}}>&times;</button></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+</div>
