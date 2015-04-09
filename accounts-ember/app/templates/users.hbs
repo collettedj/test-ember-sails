@@ -1,0 +1,28 @@
+<button type="button" class="btn btn-default" {{action 'createUser'}}>Add User</button>
+
+<div class="table-responsive">
+    <table class="table table-hover table-condensed table-bordered">
+        <thead>
+        <tr>
+            <th class="col-sm-3">Username</th>
+            <th class="col-sm-4">Email</th>
+            <th class="col-sm-2">First</th>
+            <th class="col-sm-3">Last</th>
+            <th>Save</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each model as |user|}}
+            <tr>
+                <td>{{input value=user.username classNameBindings="user.isDirty:input-dirty :form-control"}}</td>
+                <td>{{input value=user.email classNameBindings="user.isDirty:input-dirty :form-control"}}</td>
+                <td>{{input value=user.firstname classNameBindings="user.isDirty:input-dirty :form-control"}}</td>
+                <td>{{input value=user.lastname classNameBindings="user.isDirty:input-dirty :form-control"}}</td>
+                <td><button type="button" class="btn btn-info"  {{action 'updateUser' user}}>Save</button></td>
+                <td><button type="button" class="btn btn-danger"  {{action 'deleteUser' user}}>&times;</button></td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>

@@ -10,6 +10,8 @@
  */
 
 var morgan = require('morgan');
+
+
 //var logger = morgan('default');
 
 module.exports.http = {
@@ -26,6 +28,10 @@ module.exports.http = {
 
   middleware: {
 
+    myRequestLogger: morgan('dev'),
+    passportInit    : require('passport').initialize(),
+    passportSession : require('passport').session(),
+
   /***************************************************************************
   *                                                                          *
   * The order in which middleware should be run for HTTP request. (the Sails *
@@ -37,6 +43,8 @@ module.exports.http = {
        'startRequestTimer',
        'cookieParser',
        'session',
+       'passportInit',
+       'passportSession',
        'myRequestLogger',
        'bodyParser',
        'handleBodyParserError',
@@ -49,7 +57,8 @@ module.exports.http = {
        'favicon',
        '404',
        '500'
-     ],
+     ]
+
 
   /****************************************************************************
   *                                                                           *
@@ -57,7 +66,7 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
-    myRequestLogger: morgan('dev')
+
     //myRequestLogger: function (req, res, next) {
     //     //console.log("Requested :: ", req.method, req.url);
     //   logger(req, res);
