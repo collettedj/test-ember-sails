@@ -54,13 +54,14 @@ export default Base.extend({
       type: "GET",
       url: "https://localhost:1337/logout",
       data: {},
-      success: function(){
-        return {success:true};
-      },
       xhrFields: {
         withCredentials: true
       },
       crossDomain: true
+    }).then(function(res){
+      return res;
+    }, function(err){
+      return Ember.RSVP.reject(err);
     });
   }
 });
