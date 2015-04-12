@@ -182,7 +182,7 @@ var AuthController = {
         // Upon successful login, send the user to the homepage were req.user
         // will be available.
         //res.redirect('/');
-        res.send(200);
+        res.status(200).json(user);
       });
     });
   },
@@ -195,6 +195,14 @@ var AuthController = {
    */
   disconnect: function (req, res) {
     passport.disconnect(req, res);
+  },
+
+  currentUser: function(req, res) {
+    if(req.user){
+      res.json(200, req.user);
+    }else{
+      res.send(401);
+    }
   }
 };
 

@@ -1,10 +1,6 @@
 import Base from 'simple-auth/authenticators/base';
 
 export default Base.extend({
-  restore: function(data) {
-    return Ember.RSVP.resolve({success:true});
-  },
-
   ajaxPromise: function(options) {
     var request = new Ember.RSVP.Promise(function (resolve, reject) {
       options.success = function (response) {
@@ -22,8 +18,22 @@ export default Base.extend({
   },
 
 
+  restore: function(data) {
+    return this.ajaxPromise({
+      type: "GET",
+      url: "https://localhost:1337/auth/currentUser",
+      xhrFields: {
+        withCredentials: true
+      },
+      crossDomain: true
+    }).then(function(res){
+      return res;
+    }, function(err){
+      return Ember.RSVP.reject(err);
+    });
+  },
+
   authenticate: function(options) {
-    var self = this;
     return this.ajaxPromise({
         type: "POST",
         url: "https://localhost:1337/auth/local",
@@ -33,16 +43,13 @@ export default Base.extend({
         },
         crossDomain: true
       }).then(function(res){
-        return {success:true};
+        return res;
       }, function(err){
         return Ember.RSVP.reject(err);
       });
-
-
   },
 
   invalidate: function(data) {
-    var self = this;
     return this.ajaxPromise({
       type: "GET",
       url: "https://localhost:1337/logout",
