@@ -1,14 +1,23 @@
 
 <div class="well well-sm">
 
+  {{test}}
+
   <label>Username</label>
+    <span class="text-danger">{{errors.username}}</span>
   {{input value=username class="form-control"}}
 
+    <label>Email</label>
+    <span class="text-danger">{{errors.email}}</span>
+  {{input value=email class="form-control"}}
+
   <label>Password</label>
+    <span class="text-danger">{{errors.password}}</span>
   {{input type="password" value=password class="form-control"}}
 
   <label>Confirm Password</label>
-  {{input type="password" value=passwordConfirm class="form-control"}}
+    <span class="text-danger">{{errors.passwordConfirmation}}</span>
+  {{input type="password" value=passwordConfirmation class="form-control"}}
 
   <button type="button" class="btn btn-default pull-right" {{action 'registerUser'}} style="margin-top:10px;">Register</button>
   <div class="clearfix"></div>
