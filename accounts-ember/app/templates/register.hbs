@@ -1,0 +1,15 @@
+
+<div class="well well-sm">
+
+  <label>Username</label>
+  {{input value=username class="form-control"}}
+
+  <label>Password</label>
+  {{input type="password" value=password class="form-control"}}
+
+  <label>Confirm Password</label>
+  {{input type="password" value=passwordConfirm class="form-control"}}
+
+  <button type="button" class="btn btn-default pull-right" {{action 'registerUser'}} style="margin-top:10px;">Register</button>
+  <div class="clearfix"></div>
+</div>
