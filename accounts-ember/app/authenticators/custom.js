@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Base from 'simple-auth/authenticators/base';
 
 export default Base.extend({
@@ -18,14 +19,14 @@ export default Base.extend({
   },
 
 
-  restore: function(data) {
+  restore: function() {
     return this.ajaxPromise({
       type: "GET",
-      url: "https://localhost:1337/auth/currentUser",
-      xhrFields: {
-        withCredentials: true
-      },
-      crossDomain: true
+      url: "../auth/currentUser",
+      //xhrFields: {
+      //  withCredentials: true
+      //},
+      //crossDomain: true
     }).then(function(res){
       return res;
     }, function(err){
@@ -36,12 +37,12 @@ export default Base.extend({
   authenticate: function(options) {
     return this.ajaxPromise({
         type: "POST",
-        url: "https://localhost:1337/auth/local",
+        url: "../auth/local",
         data: options,
-        xhrFields: {
-          withCredentials: true
-        },
-        crossDomain: true
+        //xhrFields: {
+        //  withCredentials: true
+        //},
+        //crossDomain: true
       }).then(function(res){
         return res;
       }, function(err){
@@ -49,15 +50,15 @@ export default Base.extend({
       });
   },
 
-  invalidate: function(data) {
+  invalidate: function() {
     return this.ajaxPromise({
       type: "GET",
-      url: "https://localhost:1337/logout",
+      url: "../logout",
       data: {},
-      xhrFields: {
-        withCredentials: true
-      },
-      crossDomain: true
+      //xhrFields: {
+      //  withCredentials: true
+      //},
+      //crossDomain: true
     }).then(function(res){
       return res;
     }, function(err){

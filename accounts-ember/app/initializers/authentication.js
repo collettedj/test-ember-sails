@@ -6,5 +6,6 @@ export default {
   before:     'simple-auth',
   initialize: function(container, application) {
     container.register('authenticator:custom', CustomAuthenticator);
+    console.log(application);
   }
 };

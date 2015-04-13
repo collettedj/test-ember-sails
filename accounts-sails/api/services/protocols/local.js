@@ -135,8 +135,8 @@ exports.connect = function (req, res, next) {
  */
 exports.login = function (req, identifier, password, next) {
 
-  var peerCert = req.connection.getPeerCertificate();
-  console.log(peerCert);
+  //var peerCert = req.connection.getPeerCertificate();
+  //console.log(peerCert);
   var isEmail = validator.isEmail(identifier)
     , query   = {};
 

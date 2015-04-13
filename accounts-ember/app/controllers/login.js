@@ -12,7 +12,6 @@ export default Ember.Controller.extend({
 
   actions:{
     login:function(){
-      var self = this;
       var email = this.get('email');
       var password = this.get('password');
       this.get('session').authenticate('authenticator:custom', {identifier: email, password: password});
