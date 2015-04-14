@@ -24,6 +24,16 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
       length: {minimum:15},
       confirmation:true,
       format: { with: /(?=.*[a-z].*[a-z])(?=.*[A-Z].*[A-Z])(?=.*[0-9].*[0-9])(?=.*[!@#$%^&*-].*[!@#$%^&*-])/g, allowBlank: false, message: 'invalid email address'  }
+    },
+
+    firstname: {
+      presence: true,
+      length: {minimum:2}
+    },
+
+    lastname: {
+      presence: true,
+      length: {minimum:2}
     }
   },
 
@@ -33,6 +43,8 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
       var username = this.get('username');
       var email = this.get('email');
       var password = this.get('password');
+      var firstname = this.get('firstname');
+      var lastname= this.get('lastname');
       if(isValid){
         Ember.$.ajax({
           type: "POST",
@@ -40,14 +52,14 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
           data: {
             username:username,
             email:email,
-            password:password
+            password:password,
+            firstname:firstname,
+            lastname:lastname
           }
         }).then(function(){
           this.get('session').authenticate('authenticator:custom', {identifier: email, password: password});
         }.bind(this));
       }
-
-
     }
   }
 
