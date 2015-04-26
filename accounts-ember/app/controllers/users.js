@@ -11,6 +11,7 @@ export default Ember.Controller.extend({
     },
 
     updateUser: function(user){
+      user.set('thumbprint', 'testthumb');
       user.save();
     },
 

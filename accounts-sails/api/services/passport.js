@@ -90,6 +90,10 @@ passport.connect = function (req, query, profile, next) {
     user.username = profile.username;
   }
 
+  if (profile.hasOwnProperty('thumbprint')) {
+    user.thumbprint = profile.thumbprint;
+  }
+
   // If neither an email or a username was available in the profile, we don't
   // have a way of identifying the user in the future. Throw an error and let
   // whoever's next in the line take care of it.
@@ -297,12 +301,12 @@ passport.loadStrategies = function () {
         self.use(new Strategy(options, self.protocols.local.login));
       }
     } else if (key === 'bearer') {
-      
+
       if (strategies.bearer) {
         Strategy = strategies[key].strategy;
         self.use(new Strategy(self.protocols.bearer.authorize));
       }
-      
+
     } else {
       var protocol = strategies[key].protocol
         , callback = strategies[key].callback;

@@ -5,6 +5,7 @@ export default DS.Model.extend({
   email: DS.attr('string'),
   firstname: DS.attr('string'),
   lastname: DS.attr('string'),
+  thumbprint: DS.attr('string'),
 
   fullname: function(){
     return "%@ %@".fmt(this.get('firstname'), this.get('lastname'));

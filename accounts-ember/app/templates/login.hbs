@@ -3,7 +3,7 @@
 <label>User Name</label>
 {{input value=email class="form-control"}}
 <label>Password</label>
-{{input value=password class="form-control"}}
+{{input type="password" value=password class="form-control"}}
 <button type="button" class="btn btn-info" {{action 'login'}}>Login</button>
 
 {{#if hasErrors}}

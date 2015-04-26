@@ -3,8 +3,11 @@
 
   <p>Current User: {{session.content.currentUser.fullname}}</p>
   {{#if session.isAuthenticated}}
+    <div>
       <button type="button" class="btn-link" {{ action 'endSession' }}>Logout</button>
     {{#link-to 'users'}}Users{{/link-to}}
+    {{#link-to 'apps'}}Applications{{/link-to}}
+    </div>
   {{else}}
     {{#link-to 'login'}}Login{{/link-to}}
     {{#link-to 'register'}}Register{{/link-to}}
