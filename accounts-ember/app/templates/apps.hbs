@@ -1,7 +1,29 @@
 
-
+{{input value=newAppName class="form-control"}}
 <button type="button" class="btn btn-default" {{action 'createApplication'}}>Create Application</button>
 
-{{#each model as |app|}}
-  {{app.name}}
-{{/each}}
+<div class="table-responsive">
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+          <tr>
+              <th class="col-sm-12">Name</th>
+              <th></th>
+              <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each app in model itemController="app"}}
+          <tr>
+              <td>
+                {{input value=app.model.name classNameBindings="app.model.isDirty:input-dirty :form-control"}}
+              </td>
+              <td><button type="button" class="btn btn-info"  {{action 'updateApplication' user}}>Save</button></td>
+              <td>
+                  <span class="close" {{action 'deleteApplication'}} >&times;</span>
+              </td>
+          </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>
+
